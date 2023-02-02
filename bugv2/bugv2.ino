@@ -1,6 +1,8 @@
 // there's an old blue bug robot with six legs
 // this tries to make it work again
 
+// works on the Arduino Uno Wifi Rev2 with Bluepad and its firmware flashed
+
 #include <Bluepad32.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
