@@ -1,0 +1,3 @@
+#define TELLO_WIFI_SSID "TELLO-TELLO-FE6360"
+#define TELLO_WIFI_PASS "telloedu"
+#define TELLO_ADDR "192.168.10.1"
