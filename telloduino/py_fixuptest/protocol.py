@@ -2,8 +2,8 @@ import datetime
 import struct
 from io import BytesIO
 
-from . import crc
-from . utils import *
+import crc
+from utils import *
 
 # low-level Protocol (https://tellopilots.com/wiki/protocol/#MessageIDs)
 START_OF_PACKET                     = 0xcc
