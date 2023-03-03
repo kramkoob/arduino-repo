@@ -3,7 +3,7 @@
 
 // #include <SPI.h>
 // #include <WiFiNINA.h>
-#include "Packet.h"
+#include "protocol.h"
 // #include "wifisecrets.h"
 
 void setup() {
@@ -15,15 +15,8 @@ void setup() {
   pkt.fixup();
 
   // print packet buffer to serial
-  Serial.println("");
   Serial.println("--BEGIN PACKET--");
-  for(uint8_t k = 0; k < pkt.length(); k++){
-    Serial.print(pkt.get_buffer(k), HEX);
-    if(k + 1 < pkt.length()){
-      Serial.print(":");
-    }
-  }
-  Serial.println("");
+  pkt.print_buffer(Serial);
   Serial.println("--END PACKET--");
 }
 

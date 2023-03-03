@@ -1,5 +1,7 @@
 #include "Arduino.h"
-#include "Packet.h"
+#include "protocol.h"
+#include "utils.h"
+#include "crc.h"
 
 // as of now these functions are unused... uncomment to use, commented for array errors
 // (aforementioned array errors may or may not be a problem, unsure)
@@ -91,31 +93,18 @@ uint8_t Packet::get_buffer(uint8_t position){
   return _buf[position];
 }
 
-// return lower 8 bits ofa 16-bit integer
-uint8_t le16b0(uint16_t val) {
-  return val & 0xff;
-}
-// return upper 8 bits ofa 16-bit integer
-uint8_t le16b1(uint16_t val) {
-  return (val >> 8) & 0xff;
+// add byte to end of packet (payload)
+void Packet::add_byte(uint8_t data){
+  _buf[++_size - 1] = data;
 }
 
-// 8-bit cyclic redundancy check
-uint8_t crc8(uint8_t buf[], uint8_t buf_len) {
-  uint8_t crc = 0x77;
-  for (uint8_t k = 0; k < buf_len; k++) {
-    uint8_t v = buf[k];
-    crc = pgm_read_byte_near(crc8table + ((crc ^ v) & 0xff));
+// print buffer to interface (ex.: Serial)
+void Packet::print_buffer(Stream &interface){
+  for(uint8_t k = 0; k < _size; k++){
+    if(_buf[k] < 0x10){
+      interface.print(0);
+    }
+    interface.print(_buf[k], HEX);
+    interface.print((k + 1 < _size) ? ":" : "\n");
   }
-  return crc;
-}
-
-// 16-bit cyclic redundancy check
-uint16_t crc16(uint8_t buf[], uint8_t buf_len) {
-  uint16_t crc = 0x3692;
-  for (uint8_t k = 0; k < buf_len; k++) {
-    uint8_t v = buf[k];
-    crc = pgm_read_word_near(crc16table + ((crc ^ uint16_t(v)) & 0xff)) ^ (crc >> 8);
-  }
-  return crc;
 }
