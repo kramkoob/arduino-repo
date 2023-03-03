@@ -1,3 +1,5 @@
+// Packet class and related functions
+
 #ifndef protocol_h
 #define protocol_h
 #include "Arduino.h"

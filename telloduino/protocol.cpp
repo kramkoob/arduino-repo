@@ -1,3 +1,5 @@
+// Packet class and related functions
+
 #include "Arduino.h"
 #include "protocol.h"
 #include "utils.h"

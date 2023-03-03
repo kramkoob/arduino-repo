@@ -15,9 +15,7 @@ void setup() {
   pkt.fixup();
 
   // print packet buffer to serial
-  Serial.println("--BEGIN PACKET--");
   pkt.print_buffer(Serial);
-  Serial.println("--END PACKET--");
 }
 
 void loop() {

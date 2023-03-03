@@ -1,3 +1,5 @@
+// Functions for calculating cyclic redundancy checks (CRCs)
+
 #include "Arduino.h"
 #include "crc.h"
 
