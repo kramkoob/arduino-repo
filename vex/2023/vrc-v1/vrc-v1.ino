@@ -7,14 +7,14 @@
 
 #include <Adafruit_NeoPixel.h>
 
-#define PIXEL_COUNT 32
+#define PIXEL_COUNT 16
 #define PIXEL_PIN 6
 #define BRIGHTNESS 140
 
 float pos;
 int offset, attribute;
 uint32_t color_set;
-bool color_red;
+bool color_red, dir, coldir;
 
 Adafruit_NeoPixel strip(PIXEL_COUNT, PIXEL_PIN, NEO_GRB + NEO_KHZ800);
 
@@ -23,17 +23,30 @@ void setup() {
 }
 
 void loop() {
-  offset += 1;
-  if(offset >= 360){ offset = 0; }
-  pos = (sin(radians(offset)) + 0.5) * (PIXEL_COUNT / 2);
+  if(dir){
+    offset++;
+  }else{
+    offset--;
+  }
+  if((offset >= 180 && dir) || (offset <= 0 && !dir)){
+    coldir = !coldir;
+    if( coldir ){
+      dir = !dir;
+    }
+    if(dir){
+      offset = 0;
+    }else{
+      offset = 180;
+    }
+  }
+  pos = (cos(radians(offset)) + 0.9) * PIXEL_COUNT / 1.8;
   
-  for(int i = 0; i < (PIXEL_COUNT / 2) + 1; i++){
-    color_red = i < pos;
+  for(int i = 0; i < PIXEL_COUNT; i++){
+    color_red = (i < pos) ^ coldir ^ dir;
     color_set = strip.gamma32(strip.Color(BRIGHTNESS * color_red, 0, BRIGHTNESS * !color_red));
     strip.setPixelColor(i, color_set);
-    strip.setPixelColor(PIXEL_COUNT - i - 1, color_set);
   }
   
   strip.show();
-  delay(10);
+  delay(7);
 }
