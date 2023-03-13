@@ -55,6 +55,7 @@ Packet::Packet(uint16_t cmd) {
   _buf[7] = 0;
   _buf[8] = 0;
   _size = 9;
+//  buffer = &_buf;
 }
 
 // fill in missing bits specifying length and crc checking
@@ -85,15 +86,15 @@ void Packet::fixup() {
 }
 
 // return size of packet
-uint8_t Packet::length(){
+uint8_t Packet::size(){
   return _size;
 }
 
 // return a byte of a buffer
 // to-do: possibly optimize using pointers
-uint8_t Packet::get_buffer(uint8_t position){
-  return _buf[position];
-}
+//uint8_t Packet::get_buffer(uint8_t position){
+//  return _buf[position];
+//}
 
 // add byte to end of packet (payload)
 void Packet::add_byte(uint8_t data){

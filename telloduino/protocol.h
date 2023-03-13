@@ -57,18 +57,19 @@
 
 class Packet {
   public:
-    Packet(String cmd);
-    Packet(uint8_t cmd[]);
-    Packet(uint16_t cmd, uint8_t pkt_type, uint8_t payload[]);
+    //Packet(String cmd);
+    //Packet(uint8_t cmd[]);
+    //Packet(uint16_t cmd, uint8_t pkt_type, uint8_t payload[]);
     Packet(uint16_t cmd);
     void fixup();
     void fixup(uint16_t seq_num);
     // void add_byte(uint8_t val);
     // void add_int16(uint16_t val);
-    uint8_t length();
-    uint8_t get_buffer(uint8_t position);
+    uint8_t size();
+    //uint8_t get_buffer(uint8_t position);
     void print_buffer(Stream &interface);
     void add_byte(uint8_t data);
+    const uint8_t *buffer = &_buf[0];
   private:
     uint8_t _buf[MAX_BUFFER_LENGTH];
     uint8_t _buf_fixup[MAX_BUFFER_LENGTH];
