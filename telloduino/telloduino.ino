@@ -31,8 +31,10 @@ void setup() {
 
   // command mode
   Serial.print("command:\n\t[string packet]\n");
+  Packet command("command");
+  
   udp.beginPacket(TELLO_ADDR, TELLO_SEND_PORT);
-  udp.write("command");
+  udp.write(command.buffer, command.size());
   udp.endPacket();
   delay(1000);
 
