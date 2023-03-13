@@ -57,7 +57,7 @@
 
 class Packet {
   public:
-    //Packet(String cmd);
+    Packet(String cmd);
     //Packet(uint8_t cmd[]);
     //Packet(uint16_t cmd, uint8_t pkt_type, uint8_t payload[]);
     Packet(uint16_t cmd);

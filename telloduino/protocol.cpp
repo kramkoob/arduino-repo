@@ -8,7 +8,6 @@
 // as of now these functions are unused... uncomment to use, commented for array errors
 // (aforementioned array errors may or may not be a problem, unsure)
 
-/*
 // initialize packet with string of packet content
 Packet::Packet(String cmd) {
   _size = cmd.length();
@@ -17,6 +16,7 @@ Packet::Packet(String cmd) {
   }
 }
 
+/*
 // initialize packet with byte array of packet content
 Packet::Packet(uint8_t cmd[]) {
   _size = sizeof(cmd);
@@ -55,7 +55,6 @@ Packet::Packet(uint16_t cmd) {
   _buf[7] = 0;
   _buf[8] = 0;
   _size = 9;
-//  buffer = &_buf;
 }
 
 // fill in missing bits specifying length and crc checking
